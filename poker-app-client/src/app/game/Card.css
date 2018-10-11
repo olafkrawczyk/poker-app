@@ -1,0 +1,13 @@
+.card {
+    flex: 1;
+    display: block;
+    padding: 8px;
+    max-height: 300px;
+    align-self: center;
+}
+
+img {
+    height: 100%;
+    max-height: inherit;
+    width: auto;
+}

@@ -1,0 +1,9 @@
+.game-table {
+    padding: 0 24px 0 24px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+    flex: 1;
+    min-height: 100%;
+}
