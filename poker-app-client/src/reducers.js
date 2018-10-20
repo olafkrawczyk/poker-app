@@ -6,15 +6,6 @@ import {
 } from './actions';
 import { combineReducers } from 'redux';
 
-function gameId(state = null, action) {
-    switch (action.type) {
-        case CREATE_NEW_GAME:
-            return action.gameId; 
-        default:
-            return state;
-    }
-}
-
 function players(state = [], action) {
     switch (action.type) {
         case ADD_PLAYER:
@@ -42,9 +33,24 @@ function players(state = [], action) {
     }
 }
 
-const pokerApp = combineReducers({
-    gameId,
-    players
-});
+function game(state = null, action) {
+    switch (action.type) {
+        case CREATE_NEW_GAME:
+            return {
+                gameId : action.gameId,
+                players : []
+            }; 
+        case ADD_PLAYER:
+            return { ...state, players: players(state.players, action)};
+        case REMOVE_PLAYER:
+            return { ...state, players: players(state.players, action)};
+        case DEAL_CARDS:
+            return { ...state, players: players(state.players, action)};
+        default:
+            return state;
+    }
+}
 
-export default pokerApp;
+export default combineReducers({
+    game
+});

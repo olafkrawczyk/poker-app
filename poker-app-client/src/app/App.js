@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import Home from './home/Home';
-import Game from './game/Game';
+import HomeContainer from './home/containers/HomeContainer';
+import GameContainer from './game/containers/GameContainer';
 
 class App extends Component {
 
@@ -9,8 +9,8 @@ class App extends Component {
     return (
         <Router>
           <div>
-            <Route exact path="/" component={Home}/>
-            <Route path="/newgame/:id" component={Game}/>
+            <Route exact path="/" component={HomeContainer}/>
+            <Route path="/newgame/:id" component={GameContainer}/>
           </div>
         </Router>
     );

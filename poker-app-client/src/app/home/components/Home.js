@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import './Home.css';
-import NewGameService from './services/new-game-service';
+import NewGameService from '../services/new-game-service';
 
 class Home extends Component {
 
@@ -14,7 +14,10 @@ class Home extends Component {
     createNewGame() {
         console.log("click");
         this.newGameService.createNewGame()
-            .then(game => this.props.history.push("/newgame/" + game.id))
+            .then(game => {
+                this.props.onCreateNewGame(game.id)
+                this.props.history.push("/newgame/" + game.id)
+            })
             .catch(error => console.log(error.message));
     }
 
@@ -26,7 +29,5 @@ class Home extends Component {
         );
     }
 }
-
-//() => {} 
 
 export default withRouter(Home);
