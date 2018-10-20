@@ -52,7 +52,7 @@ router.post('/newgame', function(req, res) {
     console.log("Creating new game with id " + newGame.id);
     games.push(newGame);
     
-    return res.json(newGame);
+    return res.json(newGame.id);
 });
 
 router.get('/game/:gameId', function(req, res) {
@@ -62,14 +62,15 @@ router.get('/game/:gameId', function(req, res) {
     if (gameId < 0 || gameId >= games.length) {
         return res.status(404).send("Game with id " + gameId + " does not exist!");
     }
+    let gameStateForClient = Object.assign({}, games[gameId]);
+    delete gameStateForClient.deck;
+    delete gameStateForClient.id;
 
-    return res.json(games[gameId]);
+    return res.json(gameStateForClient);
 });
 
 router.post('/game/:gameId/addplayer', function(req, res) {
     let gameId = req.params.gameId;
-
-    console.log("Creating new player in game " + gameId);
 
     if (gameId < 0 || gameId >= games.length) {
         return res.status(404).send("Cannot add new player to the game with id " + gameId + ", beacuse the game does not exist!");
@@ -78,13 +79,13 @@ router.post('/game/:gameId/addplayer', function(req, res) {
     }
     
     let newPlayerId = gameId.toString() + games[gameId].players.length;
-    let newPlayer = games[gameId].players.push({
+    games[gameId].players.push({
         id : newPlayerId,
         name : req.body.name,
         hand : []
     });
-
-    return res.json(newPlayer);
+    console.log(`created new Player with id ${newPlayerId}`);
+    return res.json(games[gameId].players);
 });
 
 router.post('/game/:gameId/dealcards', function(req, res) {

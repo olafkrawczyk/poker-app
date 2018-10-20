@@ -12,9 +12,8 @@ class Home extends Component {
     }
 
     createNewGame() {
-        console.log("click");
         this.newGameService.createNewGame()
-            .then(game => this.props.history.push("/newgame/" + game.id))
+            .then(gameId => this.props.history.push("/game/" + gameId))
             .catch(error => console.log(error.message));
     }
 
