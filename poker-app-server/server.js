@@ -72,7 +72,7 @@ router.get('/game/:gameId', function(req, res) {
 router.post('/game/:gameId/addplayer', function(req, res) {
     let gameId = req.params.gameId;
 
-    if (gameId < 0 || gameId >= games.length) {
+    if (gameId == undefined || gameId == null || gameId < 0 || gameId >= games.length) {
         return res.status(404).send("Cannot add new player to the game with id " + gameId + ", beacuse the game does not exist!");
     } else if (games[gameId].nextStage != STAGES.DEAL) {
         return res.status(409).send("Cannot add new player at this stage of the game! Please wait forthe round to end.");

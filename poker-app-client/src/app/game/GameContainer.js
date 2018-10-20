@@ -16,7 +16,9 @@ class GameContainer extends Component {
     console.log(this.state);
     this.gameService.getGameState()
       .then(gameState => this.setState({...this.state, ...gameState, loading: false}))
-      .catch(err => console.log(err));
+      .catch(// TODO redirect to 404
+        err => {console.log(err.message);}
+      );
   }
 
   onPlayersChanged(players) {
