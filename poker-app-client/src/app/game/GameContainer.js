@@ -1,37 +1,57 @@
 import React, { Component } from 'react';
 import GameService from './services/game-service';
 import PlayerListContainer from './PlayerListContainer';
+import CardDealerContainer from './CardDealerContainer';
+import GameTable from './GameTable'
 
 class GameContainer extends Component {
 
   constructor(props) {
     super(props);
     let id = this.props.match.params.id;
-    this.state = { gameId : id , players: [], loading : true };
+    this.state = { gameId : id , players: [], communityCards: []};
     this.gameService = new GameService(id);
-    this.onPlayersChanged = this.onPlayersChanged.bind(this);
+    this.onGameStateChanged = this.onGameStateChanged.bind(this);
   }
 
   componentDidMount() {
     console.log(this.state);
     this.gameService.getGameState()
-      .then(gameState => this.setState({...this.state, ...gameState, loading: false}))
+      .then(gameState => this.onGameStateChanged(gameState))
       .catch(// TODO redirect to 404
         err => {console.log(err.message);}
       );
   }
 
-  onPlayersChanged(players) {
+  onGameStateChanged(gameState) {
+    console.log(gameState);
     this.setState({
       ...this.state,
-      players : players
+      ...gameState
+    });
+  }
+
+  mapStateToPlayerListState() {
+    return Object.assign({}, {
+      gameId : this.state.gameId,
+      players : this.state.players,
+      nextStage : this.state.nextStage
+    });
+  }
+
+  mapStateToCardDealerState() {
+    return Object.assign({},{
+      gameId : this.state.gameId,
+      nextStage : this.state.nextStage
     });
   }
 
   render() {
     return (
       <div>
-        <PlayerListContainer gameId={this.state.gameId} players={this.state.players} onPlayersChanged={(players) => this.onPlayersChanged(players)}/>
+        <PlayerListContainer state={this.mapStateToPlayerListState()} onGameStateChanged={(gameState) => this.onGameStateChanged(gameState)}/>
+        <CardDealerContainer state={this.mapStateToCardDealerState()} onGameStateChanged={(gameState) => this.onGameStateChanged(gameState)}/>
+        <GameTable cards={this.state.communityCards}/>
       </div>
     );
   }

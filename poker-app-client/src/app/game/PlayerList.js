@@ -2,7 +2,7 @@ import React from 'react';
 import Player from './Player';
 
 function PlayerList(props) {
-    let playerList = props.players.map(
+    let playerList = props.state.players.map(
         player => <li key={player.id}>
                     <Player player={player} />
                 </li>
@@ -11,7 +11,6 @@ function PlayerList(props) {
         <div>
             <h3>Player List</h3>
             <ul>{playerList}</ul>
-            <button onClick={props.onDealCards}>Deal cards</button>
         </div>
     );
 }

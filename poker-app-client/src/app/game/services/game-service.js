@@ -14,13 +14,31 @@ class GameService {
     }
 
     addPlayer(player) {
-        return axios.post(`${REST_CONFIG.API_BASE_URL}/game/${this.gameId}/addplayer`, player)
+        return axios.put(`${REST_CONFIG.API_BASE_URL}/game/${this.gameId}/addplayer`, player)
                     .then(response => { return response.data })
                     .catch(err => {throw err.response.data});
     }
 
     dealCards() {
-        return axios.post(`${REST_CONFIG.API_BASE_URL}/game/${this.gameId}/dealcards`)
+        return axios.put(`${REST_CONFIG.API_BASE_URL}/game/${this.gameId}/dealcards`, {})
+                    .then(response => { return response.data })
+                    .catch(err => {throw err.response.data});
+    }
+
+    doFlop() {
+        return axios.put(`${REST_CONFIG.API_BASE_URL}/game/${this.gameId}/flop`, {})
+                    .then(response => { return response.data })
+                    .catch(err => {throw err.response.data});
+    }
+
+    doTurn() {
+        return axios.put(`${REST_CONFIG.API_BASE_URL}/game/${this.gameId}/turn`, {})
+        .then(response => { return response.data })
+        .catch(err => {throw err.response.data});
+    }
+
+    doRiver() {
+        return axios.put(`${REST_CONFIG.API_BASE_URL}/game/${this.gameId}/river`, {})
                     .then(response => { return response.data })
                     .catch(err => {throw err.response.data});
     }
