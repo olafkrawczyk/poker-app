@@ -22,7 +22,7 @@ class PlayerListContainer extends Component {
             <div>
                 <PlayerList state={this.props.state} />
                 {
-                    this.props.state.nextStage == 'deal' && 
+                    this.props.state.nextStage === 'deal' && 
                     <PlayerForm onAddPlayer={(player) => this.addPlayer(player)} />
                 }
             </div>

@@ -1,6 +1,5 @@
-import React, { Component } from 'react';
+import React from 'react';
 import "./GameTable.css";
-import Card from "./Card";
 
 function GameTable(props) {
     // props.cards.forEach(element => {

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import './Home.css';
+import './Home.less';
 import NewGameService from './services/new-game-service';
 
 class Home extends Component {
