@@ -1,6 +1,7 @@
 'use strict';
 
 const path = require('path');
+const projectRootPath = path.join(__dirname, '../');
 const webpack = require('webpack');
 const PnpWebpackPlugin = require('pnp-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -214,6 +215,8 @@ module.exports = {
       // Support React Native Web
       // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
       'react-native': 'react-native-web',
+      '@app' : path.resolve(projectRootPath, 'src/'),
+      '@config' : path.resolve(projectRootPath, 'src/config')
     },
     plugins: [
       // Adds support for installing with Plug'n'Play, leading to faster installs and adding

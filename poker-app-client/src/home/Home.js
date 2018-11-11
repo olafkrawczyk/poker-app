@@ -20,7 +20,9 @@ class Home extends Component {
     render() {
         return (
         <div className="home">
-            <button className="button-large" onClick={this.createNewGame}>Create new game</button>
+            <div className="background-bar">
+                <button className="flat-button-large" onClick={this.createNewGame}>Create new game</button>
+            </div>
         </div>
         );
     }

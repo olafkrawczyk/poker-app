@@ -1,5 +1,5 @@
 import axios from 'axios';
-import REST_CONFIG from '../../../config/rest-config';
+import REST_CONFIG from '@config/rest-config';
 
 class GameService {
 
